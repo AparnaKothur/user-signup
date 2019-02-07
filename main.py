@@ -24,20 +24,21 @@ def is_alphabet(str):
         return 1
 
 def checkemail(str):
-    if str == '@' or str == '.' or str == '':
-        return 1
+    #if str == '@' or str == '.' and str== '':
+    if (('@' in str) and ('.' in str)) and (' ' not in str):
+        return False
     else:
-        return 0    
+        return True
 
  
     
 @app.route("/login", methods=['POST'])
 def login():
     username = request.form['username']
-    #print (username)
     userpass = request.form['userpass']
     passverify = request.form['passverify']
     useremail = request.form['useremail']
+    
     user_name_error = ''
     user_password_error = ''
     password_verify_error = ''
@@ -58,8 +59,8 @@ def login():
     if passverify != userpass or not is_empty(passverify):
         password_verify_error = " Password and confirm password do not match"
 
-    #if checkemail(username) or len(useremail) > 20 or len(useremail) < 3 :
-    if checkemail(useremail) or len(useremail) > 20 or len(useremail) < 3 :
+    #if checkemail(useremail) or len(useremail) > 20 or len(useremail) < 3:
+    if checkemail(useremail):
         user_email_error = "Please enter a valid email address"
 
     if not  user_name_error and not user_password_error and not password_verify_error and not user_email_error:
