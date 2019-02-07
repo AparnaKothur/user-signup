@@ -59,8 +59,7 @@ def login():
     if passverify != userpass or not is_empty(passverify):
         password_verify_error = " Password and confirm password do not match"
 
-    #if checkemail(useremail) or len(useremail) > 20 or len(useremail) < 3:
-    if checkemail(useremail):
+    if checkemail(useremail) or len(useremail) > 20 or len(useremail) < 3:
         user_email_error = "Please enter a valid email address"
 
     if not  user_name_error and not user_password_error and not password_verify_error and not user_email_error:
